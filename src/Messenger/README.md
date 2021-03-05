@@ -5,3 +5,8 @@
 1. Сделать только через GridPane
 
 ![Интерфейс](messanger.svg)
+
+# внешний вид
+
+- через VBox и HBox
+![Интерфейс](interface1.png)
