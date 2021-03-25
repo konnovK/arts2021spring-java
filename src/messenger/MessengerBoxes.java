@@ -1,4 +1,4 @@
-package Messenger;
+package messenger;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
