@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MessengerBoxes extends Application {
-    public static final String NAME = "Main";
+    public static final String NAME = "Коннов";
 
     public static void main(String[] args) { launch(args); }
 
@@ -37,6 +37,7 @@ public class MessengerBoxes extends Application {
         VBox left = new VBox(leftTop, leftBottom);
         Label rightLabel = new Label("Контакты");
         ListView<String> rightListView = new ListView<>();
+        rightListView.getItems().addAll("Иванов", "Петров", "Мбого");
         VBox right = new VBox(rightLabel, rightListView);
         HBox window = new HBox(left, right);
 

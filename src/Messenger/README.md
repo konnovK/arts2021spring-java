@@ -9,4 +9,5 @@
 # внешний вид
 
 - через VBox и HBox
-![Интерфейс](interface1.png)
+  ![Интерфейс](interface1.png)
+  ![Интерфейс](interface2.png)
