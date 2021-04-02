@@ -28,17 +28,26 @@ public class Buttons extends Application {
         Parent ui = initInterface();
         primaryStage.setScene(new Scene(ui, 640, 480));
 
+        initActions();
+
         primaryStage.show();
     }
 
+    private final Button button = new Button();
+    private final Label label = new Label();
+    private final ImageView imageView = new ImageView();
+    private final HBox hb = new HBox();
+
     private Parent initInterface() {
-        Button button = new Button("НАЖМИ МЕНЯ!!!!!1111111");
-        Label label = new Label("");
-        ImageView image = new ImageView();
-        HBox hb = new HBox(button);
 
-        image.setImage(new Image("http://www.hedfiles.net/spideyblast12.gif"));
+        imageView.setImage(new Image("http://www.hedfiles.net/spideyblast12.gif"));
+        button.setText("НАЖМИ МЕНЯ!!!!!1111111");
+        hb.getChildren().add(button);
 
+        return hb;
+    }
+
+    private void initActions() {
         EventHandler<Event> customButtonActionHandler = event -> {
             switch (buttonHandlerCounter) {
                 case 0 -> {
@@ -52,14 +61,12 @@ public class Buttons extends Application {
                 case 4 -> {
                     hb.getChildren().removeAll(button, label);
                     label.setText("доигрался азаза");
-                    hb.getChildren().addAll(image, label);
+                    hb.getChildren().addAll(imageView, label);
                 }
             }
             buttonHandlerCounter++;
         };
 
         button.addEventHandler(ActionEvent.ACTION, customButtonActionHandler);
-
-        return hb;
     }
 }
