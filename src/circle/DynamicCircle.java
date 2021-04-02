@@ -1,7 +1,6 @@
 package circle;
 
 import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
