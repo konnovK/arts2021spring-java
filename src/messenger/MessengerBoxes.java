@@ -24,25 +24,25 @@ public class MessengerBoxes extends Application {
         Parent ui = createUiBoxes();
         primaryStage.setScene(new Scene(ui, 800, 600));
 
+        initActions();
+
         primaryStage.show();
     }
 
-    private static Parent createUiBoxes() {
+    private final TextArea leftTop = new TextArea();
+    private final TextField leftBottomText = new TextField();
+    private final Button leftBottomButton = new Button();
+    private final HBox leftBottom = new HBox(leftBottomText, leftBottomButton);
+    private final VBox left = new VBox(leftTop, leftBottom);
+    private final Label rightLabel = new Label("Контакты");
+    private final ListView<String> rightListView = new ListView<>();
+    private final VBox right = new VBox(rightLabel, rightListView);
+    private final HBox window = new HBox(left, right);
 
-
-        TextArea leftTop = new TextArea();
-        TextField leftBottomText = new TextField();
-        Button leftBottomButton = new Button();
-        HBox leftBottom = new HBox(leftBottomText, leftBottomButton);
-        VBox left = new VBox(leftTop, leftBottom);
-        Label rightLabel = new Label("Контакты");
-        ListView<String> rightListView = new ListView<>();
+    private Parent createUiBoxes() {
         rightListView.getItems().addAll("Иванов", "Петров", "Мбого");
-        VBox right = new VBox(rightLabel, rightListView);
-        HBox window = new HBox(left, right);
         rightListView.setMinWidth(200);
         left.setMinWidth(200);
-
 
         HBox.setHgrow(left, Priority.ALWAYS);
         HBox.setHgrow(leftBottomText, Priority.ALWAYS);
@@ -51,12 +51,14 @@ public class MessengerBoxes extends Application {
         VBox.setVgrow(rightListView, Priority.ALWAYS);
 
         leftTop.setEditable(false);
-//        leftBottom.setMinHeight(200);
 
         leftBottomButton.setText("Отправить");
         leftBottomButton.setMinWidth(80);
 
+        return window;
+    }
 
+    private void initActions() {
         EventHandler<Event> customButtonActionHandler = event -> {
             String textAfterChanges = leftTop.getText();
             if (!leftTop.getText().equals("")) {
@@ -68,8 +70,5 @@ public class MessengerBoxes extends Application {
         };
 
         leftBottomButton.addEventHandler(ActionEvent.ACTION, customButtonActionHandler);
-
-
-        return window;
     }
 }
