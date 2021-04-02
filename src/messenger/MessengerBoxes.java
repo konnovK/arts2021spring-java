@@ -40,6 +40,8 @@ public class MessengerBoxes extends Application {
         rightListView.getItems().addAll("Иванов", "Петров", "Мбого");
         VBox right = new VBox(rightLabel, rightListView);
         HBox window = new HBox(left, right);
+        rightListView.setMinWidth(200);
+        left.setMinWidth(200);
 
 
         HBox.setHgrow(left, Priority.ALWAYS);
