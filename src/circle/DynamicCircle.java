@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+import java.util.function.Supplier;
+
 public class DynamicCircle extends Application {
     @Override
     public void start(Stage primaryStage) {
@@ -30,36 +32,46 @@ public class DynamicCircle extends Application {
     private final Slider slider = new Slider();
     private final ColorPicker circleColorPicker = new ColorPicker();
     private final ColorPicker backgroundColorPicker = new ColorPicker();
-
-    private final GridPane leftPane = new GridPane();
     private final Pane rightPane = new Pane();
-    private final GridPane ui = new GridPane();
-
 
     private Parent initInterface() {
 
-        leftPane.add(slider, 0, 0);
-        leftPane.add(circleColorPicker, 0, 1);
-        leftPane.add(backgroundColorPicker, 0, 2);
-
         rightPane.getChildren().add(circle);
-
-        ui.add(leftPane, 0, 0);
-        ui.add(rightPane, 1, 0);
-
-
-        leftPane.setStyle("-fx-border-color: gray; -fx-border-radius: 1px");
         rightPane.setStyle("-fx-border-color: gray; -fx-border-radius: 1px");
 
-        var columnConstraints1 = new ColumnConstraints();
-        var columnConstraints2 = new ColumnConstraints();
-        var rowConstraints = new RowConstraints();
-        columnConstraints1.setHgrow(Priority.NEVER);
-        columnConstraints2.setHgrow(Priority.ALWAYS);
-        rowConstraints.setVgrow(Priority.ALWAYS);
+        GridPane ui = new GridPane();
 
-        ui.getColumnConstraints().addAll(columnConstraints1, columnConstraints2);
-        ui.getRowConstraints().add(rowConstraints);
+        ui.add(
+                ((Supplier<GridPane>) () -> {
+                    GridPane gp = new GridPane();
+                    gp.add(slider, 0, 0);
+                    gp.add(circleColorPicker, 0, 1);
+                    gp.add(backgroundColorPicker, 0, 2);
+                    return gp;
+                }).get(),
+                0, 0
+        );
+        ui.add(rightPane, 1, 0);
+
+        ui.getColumnConstraints().addAll(
+                ((Supplier<ColumnConstraints>) () -> {
+                    ColumnConstraints col = new ColumnConstraints();
+                    col.setHgrow(Priority.NEVER);
+                    return col;
+                }).get(),
+                ((Supplier<ColumnConstraints>) () -> {
+                    ColumnConstraints col = new ColumnConstraints();
+                    col.setHgrow(Priority.ALWAYS);
+                    return col;
+                }).get()
+        );
+        ui.getRowConstraints().add(
+                ((Supplier<RowConstraints>) () -> {
+                    RowConstraints row = new RowConstraints();
+                    row.setVgrow(Priority.ALWAYS);
+                    return row;
+                }).get()
+        );
 
         return ui;
     }
