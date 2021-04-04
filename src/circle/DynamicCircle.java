@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -91,11 +90,9 @@ public class DynamicCircle extends Application {
 
 
         // BackgroundColor
-        backgroundColorPicker.addEventHandler(EventType.ROOT, event -> {
-            Color backgroundColor = backgroundColorPicker.getValue();
-            Background background = new Background(new BackgroundFill(backgroundColor, new CornerRadii(0), new Insets(0)));
-            rightPane.setBackground(background);
-        });
+        backgroundColorPicker.backgroundProperty().addListener((e) ->
+                rightPane.setBackground(new Background(new BackgroundFill(backgroundColorPicker.getValue(), new CornerRadii(0), new Insets(0))))
+        );
 
 
         // maxRadius
