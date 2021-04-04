@@ -9,9 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
-import javafx.util.Pair;
-
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class MessengerGrid extends Application {
