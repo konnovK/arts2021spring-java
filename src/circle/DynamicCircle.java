@@ -89,7 +89,7 @@ public class DynamicCircle extends Application {
 
 
         // BackgroundColor
-        backgroundColorPicker.backgroundProperty().addListener((e) ->
+        backgroundColorPicker.valueProperty().addListener((e) ->
                 rightPane.setBackground(new Background(new BackgroundFill(backgroundColorPicker.getValue(), new CornerRadii(0), new Insets(0))))
         );
 
