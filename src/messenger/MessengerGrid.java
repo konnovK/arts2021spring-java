@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class MessengerGrid extends Application {
     @Override
@@ -40,32 +41,26 @@ public class MessengerGrid extends Application {
         ui.add(contacts, 2, 1, 1, 2);
 
         ui.getColumnConstraints().addAll(
-                (new Function<Pair<ColumnConstraints, Priority>, ColumnConstraints>() {
-                    @Override
-                    public ColumnConstraints apply(Pair<ColumnConstraints, Priority> columnConstraintsPriorityPair) {
-                        columnConstraintsPriorityPair.getKey().setHgrow(columnConstraintsPriorityPair.getValue());
-                        return columnConstraintsPriorityPair.getKey();
-                    }
-                }).apply(new Pair<>(new ColumnConstraints(), Priority.ALWAYS)),
+                ((Supplier<ColumnConstraints>) () -> {
+                    ColumnConstraints col = new ColumnConstraints();
+                    col.setHgrow(Priority.ALWAYS);
+                    return col;
+                }).get(),
                 new ColumnConstraints(),
                 new ColumnConstraints()
         );
         ui.getRowConstraints().addAll(
                 new RowConstraints(),
-                (new Function<Pair<RowConstraints, Priority>, RowConstraints>() {
-                    @Override
-                    public RowConstraints apply(Pair<RowConstraints, Priority> rowConstraintsPriorityPair) {
-                        rowConstraintsPriorityPair.getKey().setVgrow(rowConstraintsPriorityPair.getValue());
-                        return rowConstraintsPriorityPair.getKey();
-                    }
-                }).apply(new Pair<>(new RowConstraints(), Priority.ALWAYS)),
-                (new Function<Pair<RowConstraints, Double>, RowConstraints>() {
-                    @Override
-                    public RowConstraints apply(Pair<RowConstraints, Double> rowConstraintsDoublePair) {
-                        rowConstraintsDoublePair.getKey().setMaxHeight(rowConstraintsDoublePair.getValue());
-                        return rowConstraintsDoublePair.getKey();
-                    }
-                }).apply(new Pair<>(new RowConstraints(), new Double(25)))
+                ((Supplier<RowConstraints>) () -> {
+                    RowConstraints row = new RowConstraints();
+                    row.setVgrow(Priority.ALWAYS);
+                    return row;
+                }).get(),
+                ((Supplier<RowConstraints>) () -> {
+                    RowConstraints row = new RowConstraints();
+                    row.setMaxHeight(25);
+                    return row;
+                }).get()
         );
 
         return ui;
