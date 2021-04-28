@@ -1,9 +1,9 @@
 package fractals;
 
+import fractals.fractal.Circle;
 import fractals.fractal.Fractal;
 import fractals.fractal.Mandelbrot;
-import fractals.palette.GrayPalette;
-import fractals.palette.Palette;
+import fractals.palette.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -33,7 +33,10 @@ public class Application extends javafx.application.Application {
     private final PixelWriter pixelWriter = image.getPixelWriter();
 
     private final Fractal fractal = new Mandelbrot();
-    private final Palette palette = new GrayPalette();
+    private final Palette palette = new HsbPalette();
+    private final ColorPalette colorPalette = new HsbColorPalette();
+
+    private final boolean isIntPalette = false;
 
     private Parent initInterface() {
         GridPane globalPane = new GridPane();
@@ -46,17 +49,20 @@ public class Application extends javafx.application.Application {
 
     private void draw() {
 
-        double x0 = -1;
-        double y0 = 1;
-        double d = 2. / width;
+        double x0 = -2;
+        double y0 = 2;
+        double d = 4. / width;
 
         for (int xt = 0; xt < width; xt++) {
             for (int yt = 0; yt < height; yt++) {
                 double x = x0 + d * xt;
                 double y = y0 - d * yt;
 
-                String color = webColorStringFromInt(palette.colorize(fractal.evaluate(x, y)));
-                pixelWriter.setColor(xt, yt, Color.web("0x" + color));
+                Color color = Color.web("0x" + webColorStringFromInt(palette.colorize(fractal.evaluate(x, y))));
+                if (!isIntPalette) {
+                    color = colorPalette.colorize(fractal.evaluate(x,y));
+                }
+                pixelWriter.setColor(xt, yt, color);
             }
         }
     }
