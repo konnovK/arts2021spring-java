@@ -20,15 +20,15 @@ public class Application extends javafx.application.Application {
 
         Parent ui = initInterface();
         draw();
-        primaryStage.setScene(new Scene(ui, 1280, 720));
+        primaryStage.setScene(new Scene(ui, 800, 600));
 
 //        initActions();
 
         primaryStage.show();
     }
 
-    private final int width = 640;
-    private final int height = 640;
+    private final int width = 600;
+    private final int height = 600;
     private final WritableImage image = new WritableImage(width, height);
     private final PixelWriter pixelWriter = image.getPixelWriter();
 
@@ -55,17 +55,21 @@ public class Application extends javafx.application.Application {
                 double x = x0 + d * xt;
                 double y = y0 - d * yt;
 
-                int colorValue = palette.colorize(fractal.evaluate(x, y));
-                String color = Integer.toHexString(colorValue);
-                if (colorValue == 0) {
-                    color = "000";
-                }
-                if (color.length() == 5) {
-                    color = "0" + color;
-                }
-//                System.out.println(color);
+                String color = webColorStringFromInt(palette.colorize(fractal.evaluate(x, y)));
                 pixelWriter.setColor(xt, yt, Color.web("0x" + color));
             }
         }
+    }
+
+    private String webColorStringFromInt(int colorValue) {
+        String color = Integer.toHexString(colorValue);
+        if (colorValue == 0) {
+            color = "000";
+        }
+        if (color.length() == 5) {
+            color = "0" + color;
+        }
+
+        return color;
     }
 }
