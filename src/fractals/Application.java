@@ -59,7 +59,7 @@ public class Application extends javafx.application.Application {
                 double x = x0 + d * xScreen;
                 double y = y0 - d * yScreen;
 
-                Color color = Color.web("0x" + webColorStringFromInt(palette.colorize(fractal.evaluate(x, y))));
+                Color color = Color.web(webColorStringFromInt(palette.colorize(fractal.evaluate(x, y))));
                 if (!isIntPalette) {
                     color = colorPalette.colorize(fractal.evaluate(x,y));
                 }
@@ -69,14 +69,10 @@ public class Application extends javafx.application.Application {
     }
 
     private String webColorStringFromInt(int colorValue) {
-        String color = Integer.toHexString(colorValue);
         if (colorValue == 0) {
-            color = "000";
+            return "0x000000";
         }
-        if (color.length() == 5) {
-            color = "0" + color;
-        }
-
-        return color;
+        String color ="000000" + Integer.toHexString(colorValue);
+        return "0x" + color.substring(color.length() - 6);
     }
 }
