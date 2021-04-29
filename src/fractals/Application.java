@@ -48,21 +48,22 @@ public class Application extends javafx.application.Application {
     }
 
     private void draw() {
+        drawFractal(-2, 2, 4);
+    }
 
-        double x0 = -2;
-        double y0 = 2;
-        double d = 4. / width;
+    private void drawFractal(double x0, double y0, double sizeOfView) {
+        double d = sizeOfView / width;
 
-        for (int xt = 0; xt < width; xt++) {
-            for (int yt = 0; yt < height; yt++) {
-                double x = x0 + d * xt;
-                double y = y0 - d * yt;
+        for (int xScreen = 0; xScreen < width; xScreen++) {
+            for (int yScreen = 0; yScreen < height; yScreen++) {
+                double x = x0 + d * xScreen;
+                double y = y0 - d * yScreen;
 
                 Color color = Color.web("0x" + webColorStringFromInt(palette.colorize(fractal.evaluate(x, y))));
                 if (!isIntPalette) {
                     color = colorPalette.colorize(fractal.evaluate(x,y));
                 }
-                pixelWriter.setColor(xt, yt, color);
+                pixelWriter.setColor(xScreen, yScreen, color);
             }
         }
     }

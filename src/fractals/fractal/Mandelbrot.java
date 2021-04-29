@@ -1,9 +1,9 @@
 package fractals.fractal;
 
 public class Mandelbrot implements Fractal {
-    private final double NUMBER_OF_STEPS = 100;
-    private final double MAX_VALUE_OF_SERIES_ELEMENT = 4d;
-    // значения уже большие, прога работает долго
+    private final double NUMBER_OF_STEPS = 300;
+    private final double MAX_VALUE_OF_SERIES_ELEMENT = 2d;
+    // MAX_VALUE_OF_SERIES_ELEMENT достаточно значения 2
 
 
     @Override
