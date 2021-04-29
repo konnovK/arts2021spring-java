@@ -7,7 +7,8 @@ public class HsbPalette implements Palette {
         int s = 100;
         int b = 100;
 
-        int _h = ((int) h / 60) % 6;
+        int _h =(int)  (h / 60.) % 6;
+//        System.out.println(_h);
 
         double a = b * ((((int) h) % 60) / 60.);
 
@@ -49,10 +50,10 @@ public class HsbPalette implements Palette {
         red = red % 256;
         green = green % 256;
         blue = blue % 256;
-        System.out.print(" r = " + red);
-        System.out.print(" g = " + green);
-        System.out.print(" b = " + blue);
-        System.out.println();
+//        System.out.print(" r = " + red);
+//        System.out.print(" g = " + green);
+//        System.out.print(" b = " + blue);
+//        System.out.println();
         return (red << 16) + (green << 8) + blue;
     }
 }

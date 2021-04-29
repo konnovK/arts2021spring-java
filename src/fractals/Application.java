@@ -20,23 +20,23 @@ public class Application extends javafx.application.Application {
 
         Parent ui = initInterface();
         draw();
-        primaryStage.setScene(new Scene(ui, 800, 600));
+        primaryStage.setScene(new Scene(ui, 800, 800));
 
 //        initActions();
 
         primaryStage.show();
     }
 
-    private final int width = 600;
-    private final int height = 600;
+    private final int width = 800;
+    private final int height = 800;
     private final WritableImage image = new WritableImage(width, height);
     private final PixelWriter pixelWriter = image.getPixelWriter();
 
     private final Fractal fractal = new Mandelbrot();
-    private final Palette palette = new HsbPalette();
+    private final Palette palette = new GrayPalette();
     private final ColorPalette colorPalette = new HsbColorPalette();
 
-    private final boolean isIntPalette = false;
+    private final boolean isIntPalette = true;
 
     private Parent initInterface() {
         GridPane globalPane = new GridPane();
